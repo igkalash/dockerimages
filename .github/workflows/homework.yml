@@ -17,7 +17,7 @@ jobs:
       - name: Build and push docker image
         uses: docker/build-push-action@v4
         with:
-          context: dockerimages/
+          
           push: true
           tags: turbotroll/homework:0.1
   
