@@ -10,10 +10,10 @@ def hello_world():
 
 
 
-@app.route('/bye')
+@app.route('/novaja_ficha')
 
 def bye():
-    return 'bye, World123!'
+    return 'sosi shljapu'
 
 
 
