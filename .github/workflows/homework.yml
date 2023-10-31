@@ -19,5 +19,5 @@ jobs:
         with:
           
           push: true
-          tags: turbotroll/${branch}-${SHA7}
+          tags: turbotroll/homework:${branch}-${SHA7}
   
