@@ -6,14 +6,14 @@ app = Flask(__name__)
 
 def hello_world():
     
-    return 'Hello, World!123'
+    return 'Hello, World!
 
 
 
 @app.route('/novaja_ficha')
 
 def bye():
-    return 'sosi shljapu123456'
+    return 'sosi shljapu123456789'
 
 
 
