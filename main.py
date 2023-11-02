@@ -13,7 +13,7 @@ def hello_world():
 @app.route('/novaja_ficha')
 
 def bye():
-    return 'sosi shljapu branch'
+    return 'sosi shljapu branch123'
 
 
 
