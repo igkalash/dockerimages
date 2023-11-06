@@ -13,7 +13,7 @@ def hello_world():
 @app.route('/novaja_ficha')
 
 def bye():
-    return 'sosi shljapu main1'
+    return 'sosi shljapu erewmain1'
 
 
 
