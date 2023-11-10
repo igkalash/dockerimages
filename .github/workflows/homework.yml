@@ -19,7 +19,7 @@ jobs:
         with:
           
           push: true
-          tags: turbotroll/homework:${{ github.ref_name }}-${{github.workflow_sha}}
+          tags: turbotroll/homework:${{ github.ref_name }}-${{github.short_sha}}
 
         
   
