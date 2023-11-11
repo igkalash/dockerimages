@@ -23,7 +23,7 @@ jobs:
           
           
           push: true
-          tags: turbotroll/homework:${{ github.ref_name }}-${SHORT_SHA}
+          tags: turbotroll/homework:${{ github.ref_name }}
 
         
   
