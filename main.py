@@ -13,7 +13,7 @@ def hello_world():
 @app.route('/novaja_ficha')
 
 def bye():
-    return 'sosi shljapu123 branch'
+    return 'sosi shljapu main12'
 
 
 
@@ -25,3 +25,4 @@ def name(name,number):
 if __name__ == "__main__":
     
     app.run(host="0.0.0.0", port=5000, debug=True)
+
