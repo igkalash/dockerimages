@@ -1,11 +1,14 @@
 name: Python Linter Check
 
 on:
+  push:
+    branches:
+      - main
+      - mybranch
   pull_request:
-    types:
-      - opened
-      - synchronize
-
+    branches:
+      - main
+      - mybranch
 jobs:
   lint:
     runs-on: ubuntu-latest
