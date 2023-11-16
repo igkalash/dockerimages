@@ -11,7 +11,7 @@ def hello_world():
 
 @app.route('/novaja_ficha')
 def bye():
-    return 'sosi shljapu branch linter testing'
+    return 'sosi shljapu branch linter 123'
 
 
 @app.route('/username/<name>/<int:number>')
