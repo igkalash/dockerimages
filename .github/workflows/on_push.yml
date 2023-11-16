@@ -1,4 +1,4 @@
-name: homework
+name: on_push
 
 
 on: push
