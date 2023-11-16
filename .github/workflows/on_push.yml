@@ -19,7 +19,7 @@ jobs:
           password: ${{ secrets.DOCKER_TOKEN }}
 
       - name: sha short
-        run: echo "SHORT_SHA=`echo ${GITHUB_SHA} | cut -c1-8`" >> $GITHUB_ENV   
+        run: echo "SHORT_SHA=`echo ${GITHUB_SHA} | cut -c1-7`" >> $GITHUB_ENV   
         
       - name: Build and push docker image
         uses: docker/build-push-action@v4        
