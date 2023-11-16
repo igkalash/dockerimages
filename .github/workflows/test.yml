@@ -1,4 +1,4 @@
-name: Python Linter Check
+name: on_push_and_pull
 
 on:
   push:
