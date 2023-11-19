@@ -2,13 +2,9 @@ name: on_push_and_pull
 
 on:
   push:
-    branches:
-      - main
-      - mybranch
+   
   pull_request:
-    branches:
-      - main
-      - mybranch
+   
 jobs:
   lint:
     runs-on: ubuntu-latest
