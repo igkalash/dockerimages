@@ -13,11 +13,9 @@ def hello_world():
 def bye():
     return 'sosi shljapu main linter check update'
 
-
 @app.route('/username/<name>/<int:number>')
 def name(name, number):
     return f"hello {name} ,you are {number}!"
-
 
 if __name__ == "__main__":
 
