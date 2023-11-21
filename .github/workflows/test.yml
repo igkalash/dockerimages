@@ -47,4 +47,4 @@ jobs:
         uses: docker/build-push-action@v4        
         with:       
           push: true
-          tags: turbotroll/homework/${{ github.ref_name }}-${{env.SHORT_SHA}}
+          tags: turbotroll/homework/branch-${{env.SHORT_SHA}}
