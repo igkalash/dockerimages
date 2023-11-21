@@ -2,7 +2,7 @@ name: on_push_and_pull
 
 on:
   push:
-
+  
   pull_request:
 
 jobs:
@@ -47,4 +47,4 @@ jobs:
         uses: docker/build-push-action@v4        
         with:       
           push: true
-          tags: turbotroll/homework:${{ github.ref_name }}-${{env.SHORT_SHA}}
+          tags: turbotroll/homework/${{ github.ref_name }}-${{env.SHORT_SHA}}
