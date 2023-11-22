@@ -41,10 +41,13 @@ jobs:
           password: ${{ secrets.DOCKER_TOKEN }}
 
       - name: sha short
-        run: echo "SHORT_SHA=`echo ${GITHUB_SHA} | cut -c1-7`" >> $GITHUB_ENV   
+        run: | 
+         echo "SHORT_SHA=`echo ${GITHUB_SHA} | cut -c1-7`" >> $GITHUB_ENV   
+         echo "REF_NAME=`echo ${GITHUB_REF_NAME} |  tr '/' '_'`" >> $GITHUB_ENV   
+        
         
       - name: Build and push docker image
         uses: docker/build-push-action@v4        
         with:       
           push: true
-          tags: turbotroll/homework:${{ github.ref_name }}-${{env.SHORT_SHA}}
+          tags: turbotroll/homework:${{ env.REF_NAME}}-${{env.SHORT_SHA}}
