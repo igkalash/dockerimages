@@ -13,7 +13,7 @@ def hello_world():
 def bye():
 
 
-    return 'sosi shljapu main linter check update'
+    return 'sosi shljapu main linter check branch update'
 
 
 
