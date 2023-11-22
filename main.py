@@ -12,9 +12,7 @@ def hello_world():
 @app.route('/novaja_ficha')
 def bye():
 
-
     return 'sosi shljapu main linter check branch update'
-
 
 
 @app.route('/username/<name>/<int:number>')
