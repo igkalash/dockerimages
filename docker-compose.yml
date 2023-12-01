@@ -1,0 +1,15 @@
+version: '3'
+services:
+  app:
+    image: python:3.9-slim-buster
+    container_name: homework
+    restart: always    
+    ports:
+      - 5000:5000
+    working_dir: /app
+    volumes:
+      - ./:/app
+    command: sh -c "pip3 install -r requirements.txt && python3 main.py"
+
+
+    
