@@ -58,7 +58,7 @@ jobs:
       steps:
         - uses: actions/checkout@v2
         - name: Defining docker host
-          run: export DOCKER_HOST=tcp://54.193.30.19
-        - name: Build the stack
-          run: docker-compose up -d
+          run: |
+           export DOCKER_HOST=tcp://54.193.30.19
+           docker-compose up -d
        
