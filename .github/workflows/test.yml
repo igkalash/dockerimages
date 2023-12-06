@@ -47,17 +47,12 @@ jobs:
         
       - name: Build and push docker image with tag
         uses: docker/build-push-action@v4 
-        if: startsWith(github.ref, 'refs/tags/test')
+        
         with:       
           push: true
           tags: turbotroll/homework:${{github.ref_name}}
        
-      - name: Build and push docker image with no tag
-        uses: docker/build-push-action@v4 
-        with:       
-          push: true
-          tags: turbotroll/homework:${{ env.REF_NAME}}-${{env.SHORT_SHA}}
-
+      
       
     
   
