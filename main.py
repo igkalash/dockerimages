@@ -12,7 +12,7 @@ def hello_world():
 @app.route('/novaja_ficha')
 def bye():
 
-    return 'sosi shljapu main compose tag 12'
+    return 'sosi shljapu main compose tag 13212'
 
 
 @app.route('/username/<name>/<int:number>')
