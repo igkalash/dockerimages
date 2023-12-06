@@ -50,12 +50,8 @@ jobs:
         
         with:       
           push: true
-          tags: turbotroll/homework:${{github.ref_name}}
-       
-      
-      
-    
-  
+          tags: turbotroll/homework:1
+                   
   compose_up:
       name: comose up on a remote server
       runs-on: ubuntu-latest
