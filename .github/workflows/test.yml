@@ -40,6 +40,16 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_TOKEN }}
 
+      - name: Cheking if tag exists
+        if: startsWith(github.ref, 'refs/tags/test')
+        uses: docker/build-push-action@v4 
+        
+        with:
+                 
+          push: true
+          tags: turbotroll/homework:${{github.ref_name}}
+      
+
       - name: sha short
         run: | 
          echo "SHORT_SHA=`echo ${GITHUB_SHA} | cut -c1-7`" >> $GITHUB_ENV   
@@ -47,11 +57,11 @@ jobs:
         
       - name: Build and push docker image with tag
         uses: docker/build-push-action@v4 
-        if: startsWith(github.ref, 'refs/tags/test')
+        
         with:
                  
           push: true
-          tags: turbotroll/homework:${{github.ref_name}}
+          tags: turbotroll/homework:${{ env.REF_NAME}}-${{env.SHORT_SHA}}
                    
   compose_up:
       name: comose up on a remote server
