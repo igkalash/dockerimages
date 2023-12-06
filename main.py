@@ -12,7 +12,7 @@ def hello_world():
 @app.route('/novaja_ficha')
 def bye():
 
-    return 'sosi shljapu main compose tag testing123'
+    return 'sosi shljapu main compose tag 1'
 
 
 @app.route('/username/<name>/<int:number>')
@@ -23,3 +23,4 @@ def name(name, number):
 if __name__ == "__main__":
 
     app.run(host="0.0.0.0", port=5000, debug=True)
+
