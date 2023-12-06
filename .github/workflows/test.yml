@@ -50,7 +50,7 @@ jobs:
         
         with:       
           push: true
-          tags: turbotroll/homework:1
+          tags: turbotroll/homework:${{github.ref_name}}
                    
   compose_up:
       name: comose up on a remote server
