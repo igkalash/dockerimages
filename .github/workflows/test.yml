@@ -67,10 +67,9 @@ jobs:
       steps:
         - uses: actions/checkout@v2
         - name: Set up SSH
-          uses: LuisEnMarroquin/setup-ssh-action@v2.0.0
-          with:
-            SSHKEY: ${{ secrets.SSH_PRIVATE_KEY }}
-        - run: |
-            ssh -T -o StrictHostKeyChecking=no ubuntu@52.53.242.153 
+          run: |
+            echo ${{ secrets.SSH_PRIVATE_KEY }} > /home/runner/.ssh/github_actions.pem
+            chmod 400 /home/runner/.ssh/github_actions.pem
+            ssh -T -o StrictHostKeyChecking=no -i /home/runner/.ssh/github_actions.pem ubuntu@52.53.242.153 
             docker-compose up -d
        
