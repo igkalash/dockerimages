@@ -71,6 +71,6 @@ jobs:
           with:
             SSHKEY: ${{ secrets.SSH_PRIVATE_KEY }}
         - run: |
-            ssh -t ubuntu@52.53.242.153
+            ssh -T ubuntu@52.53.242.153
             docker-compose up -d
        
