@@ -68,8 +68,8 @@ jobs:
         - uses: actions/checkout@v2
         - name: Set up SSH
           run: |
-            echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/github_actions.pem
-            chmod 400 ~/github_actions.pem
-            ssh -T -o StrictHostKeyChecking=no -i ~/github_actions.pem ubuntu@52.53.242.153 docker-compose up -d
-            
+            echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+            docker context create homework --description "remote connection to ec2" --docker "host=ssh://ubuntu@52.53.242.153"
+            docker context use homework
+            docker-compose up -d
        
