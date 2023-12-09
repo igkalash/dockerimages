@@ -40,6 +40,16 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_TOKEN }}
 
+      - name: Cheking if tag exists
+        if: startsWith(github.ref, 'refs/tags/test')
+        uses: docker/build-push-action@v4 
+        
+        with:
+                 
+          push: true
+          tags: turbotroll/homework:${{github.ref_name}}
+      
+
       - name: sha short
         run: | 
          echo "SHORT_SHA=`echo ${GITHUB_SHA} | cut -c1-7`" >> $GITHUB_ENV   
@@ -69,6 +79,7 @@ jobs:
         - uses: webfactory/ssh-agent@v0.8.0
           with:
             ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+            
         - name: sshin
           run: |
             docker context create homework --description "remote connection to ec2" --docker "host=ssh://ubuntu@54.151.39.65"
