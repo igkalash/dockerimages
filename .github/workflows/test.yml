@@ -79,9 +79,10 @@ jobs:
         - uses: webfactory/ssh-agent@v0.8.0
           with:
             ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+            
         - name: sshin
           run: |
-            docker context create homework --description "remote connection to ec2" --docker "host=ssh://ubuntu@54.241.232.171"
+            docker context create homework --description "remote connection to ec2" --docker "host=ssh://ubuntu@54.151.39.65"
             docker context use homework
             docker-compose up -d
       
