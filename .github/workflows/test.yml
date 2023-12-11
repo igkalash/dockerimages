@@ -75,6 +75,6 @@ jobs:
 
         - name: sshin
           run: |
-            docker context create homework --description "remote connection to ec2" --docker "host=ssh://ubuntu@54.151.39.65"
+            docker context create homework --description "remote connection to ec2" --docker "host=ssh://ubuntu@13.57.224.155"
             docker context use homework
             docker-compose up -d
