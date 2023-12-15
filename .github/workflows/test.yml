@@ -74,7 +74,10 @@ jobs:
             ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
         - name: sshin
+        # try to -i {{ secrets.SSH_PRIVATE_KEY }}
           run: |
-            docker context create homework --description "remote connection to ec2" --docker "host=ssh://ubuntu@13.57.224.155"
+            ssh -i ${{ secrets.SSH_PRIVATE_KEY }} ubuntu@54.67.89.136
+            exit
+            docker context create homework --description "remote connection to ec2" --docker "host=ssh://ubuntu@54.67.89.136"
             docker context use homework
             docker-compose up -d

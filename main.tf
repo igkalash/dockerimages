@@ -14,8 +14,9 @@ provider "aws" {
 resource "aws_instance" "homework" {
   ami           = "ami-0cbd40f694b804622"
   instance_type = "t2.micro"
-
+  vpc_security_group_ids = ["sg-0400fda14a7993d65"]
+  key_name = "homework_key_pair"
   tags = {
-    Name = "homework-1"
+    Name = "homework tag"
   }
 }
