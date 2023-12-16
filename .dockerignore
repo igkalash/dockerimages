@@ -1,2 +1,3 @@
 main.tf
 docker-compose.yml
+terraform.tfstate.lock.info
