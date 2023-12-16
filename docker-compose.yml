@@ -1,8 +1,8 @@
 version: '3'
 services:
   app:
-    image: turbotroll/homework:main-b09234c
+    image: turbotroll/homework:main-525c68a
     container_name: homework
-    restart: always   
+    restart: always
     ports:
           - 5000:5000
