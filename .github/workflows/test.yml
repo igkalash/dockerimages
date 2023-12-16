@@ -64,19 +64,26 @@ jobs:
 
 
 
-  compose_up:
+  deploy:
       name: comose up on a remote server
       runs-on: ubuntu-latest
       steps:
         - uses: actions/checkout@v2
-        - uses: webfactory/ssh-agent@v0.8.0
+
+        - name: copy key to github runner
+          uses: webfactory/ssh-agent@v0.8.0
           with:
             ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
-        - name: sshin
+        - name: populate known hosts on a runner
           run: |
-            ssh -o StrictHostKeyChecking=no ubuntu@54.183.217.88 exit
-            hostname
-            docker context create homework --description "remote connection to ec2" --docker "host=ssh://ubuntu@54.183.217.88"
+            ssh -o StrictHostKeyChecking=no ubuntu@52.53.241.39 exit
+
+        - name: create context for a docker
+          run: |
+            docker context create homework --description "remote connection to ec2" --docker "host=ssh://ubuntu@52.53.241.39"
             docker context use homework
+
+        - name: compose up
+          run: |
             docker-compose up -d
