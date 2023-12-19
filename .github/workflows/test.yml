@@ -73,7 +73,7 @@ jobs:
 
         - name: tag for the docker compose
           run: |
-           echo "IMAGE_TAG=main-e898cdb >> $GITHUB_ENV
+           echo "IMAGE_TAG=main-e898cdb" >> $GITHUB_ENV
            echo $IMAGE_TAG
 
 
