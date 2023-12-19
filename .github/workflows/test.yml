@@ -73,7 +73,7 @@ jobs:
 
         - name: tag for the docker compose
           run: |
-           echo "IMAGE_TAG=echo ${GITHUB_REF_NAME}" >> $GITHUB_ENV
+           echo "IMAGE_TAG=main-e898cdb >> $GITHUB_ENV
            echo $IMAGE_TAG
 
 
@@ -84,11 +84,11 @@ jobs:
 
         - name: populate known hosts on a runner
           run: |
-            ssh -o StrictHostKeyChecking=no ubuntu@18.144.11.76 exit
+            ssh -o StrictHostKeyChecking=no ubuntu@13.52.101.12 exit
 
         - name: create context for a docker
           run: |
-            docker context create homework --description "remote connection to ec2" --docker "host=ssh://ubuntu@18.144.11.76"
+            docker context create homework --description "remote connection to ec2" --docker "host=ssh://ubuntu@13.52.101.12"
             docker context use homework
 
         - name: compose up
