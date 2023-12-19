@@ -83,11 +83,11 @@ jobs:
 
         - name: populate known hosts on a runner
           run: |
-            ssh -o StrictHostKeyChecking=no ubuntu@abc exit
+            ssh -o StrictHostKeyChecking=no ubuntu@18.144.11.76 exit
 
         - name: create context for a docker
           run: |
-            docker context create homework --description "remote connection to ec2" --docker "host=ssh://ubuntu@abc"
+            docker context create homework --description "remote connection to ec2" --docker "host=ssh://ubuntu@18.144.11.76"
             docker context use homework
 
         - name: compose up
