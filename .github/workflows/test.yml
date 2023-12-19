@@ -73,7 +73,7 @@ jobs:
 
         - name: tag for the docker compose
           run: |
-           echo "REF_NAME=`echo ${GITHUB_REF_NAME} >> $DOCKER_TAG
+           echo "REF_NAME=echo ${GITHUB_REF_NAME}" >> $DOCKER_TAG
 
 
         - name: copy key to github runner
@@ -83,11 +83,11 @@ jobs:
 
         - name: populate known hosts on a runner
           run: |
-            ssh -o StrictHostKeyChecking=no ubuntu@52.53.241.39 exit
+            ssh -o StrictHostKeyChecking=no ubuntu@abc exit
 
         - name: create context for a docker
           run: |
-            docker context create homework --description "remote connection to ec2" --docker "host=ssh://ubuntu@52.53.241.39"
+            docker context create homework --description "remote connection to ec2" --docker "host=ssh://ubuntu@abc"
             docker context use homework
 
         - name: compose up
