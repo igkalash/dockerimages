@@ -73,7 +73,7 @@ jobs:
 
         - name: tag for the docker compose
           run: |
-           echo "REF_NAME=echo ${GITHUB_REF_NAME}" >> $DOCKER_TAG
+           echo "DOCKER_TAG=echo ${GITHUB_REF_NAME}" >> $GITHUB_ENV
 
 
         - name: copy key to github runner
