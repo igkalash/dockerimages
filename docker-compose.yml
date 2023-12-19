@@ -1,7 +1,7 @@
 version: '3'
 services:
   app:
-    image: turbotroll/homework:main-525c68a
+    image: turbotroll/homework:${IMAGE_TAG}
     container_name: homework
     restart: always
     ports:
