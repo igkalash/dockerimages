@@ -60,7 +60,7 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           push: true
-          tags:
+          tags: turbotroll/homework:${{ env.REF_NAME}}-${{env.SHORT_SHA}}
 
 
 
