@@ -87,7 +87,7 @@ jobs:
 
         - name: tag for the docker compose
           run: |
-           IMAGE_TAG=turbotroll/homework:${{ env.REF_NAME}}-${{env.SHORT_SHA}}
+           export IMAGE_TAG=turbotroll/homework:${{ env.REF_NAME}}-${{env.SHORT_SHA}}
 
 
 
