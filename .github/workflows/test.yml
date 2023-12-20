@@ -66,10 +66,10 @@ jobs:
           tags: turbotroll/homework:${{ env.REF_NAME}}-${{env.SHORT_SHA}}
 
       - name: Upload Artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: my-artifact
-          path: ${{ runner.workspace }}
+          path: ${{github.workspace}}
 
 
 
@@ -81,7 +81,7 @@ jobs:
         - uses: actions/checkout@v2
 
         - name: Download Artifact
-          uses: actions/download-artifact@v2
+          uses: actions/download-artifact@v3
           with:
             name: my-artifact
 
