@@ -76,8 +76,8 @@ jobs:
 
         - name: tag for the docker compose
           run: |
-
-           echo "IMAGE_TAG=${{ env.DOCKER_TAG}}
+           IMAGE_TAG=${{env.DOCKER_TAG}}
+           echo "IMAGE_TAG=${{env.DOCKER_TAG}}"
 
 
 
