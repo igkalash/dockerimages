@@ -31,7 +31,8 @@ jobs:
   push_to_registry:
     name: Push docker image to docker hub
     runs-on: ubuntu-latest
-
+    outputs:
+      output: ${{steps.tag.outputs.ockerimagetag}}
     steps:
       - name: check out the repo
         uses: actions/checkout@v2
@@ -49,11 +50,14 @@ jobs:
           push: true
           tags: turbotroll/homework:${{github.ref_name}}
 
-      - name: use sha short if there is no tag
+      - id: tag
+        name: use sha short if there is no tag
         if: ${{ ! startsWith(github.ref, 'refs/tags/') }}
+
         run: |
          echo "SHORT_SHA=`echo ${GITHUB_SHA} | cut -c1-7`" >> $GITHUB_ENV
          echo "REF_NAME=`echo ${GITHUB_REF_NAME} |  tr '/' '_'`" >> $GITHUB_ENV
+         echo "::set-output name=dockerimagetag::REF_NAME-SHORT_SHA"
 
       - name: Build and push docker image with no tag
         if: ${{ ! startsWith(github.ref, 'refs/tags/') }}
