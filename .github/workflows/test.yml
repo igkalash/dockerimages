@@ -63,13 +63,13 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           push: true
-          tags: turbotroll/homework:${{ env.REF_NAME}}-${{env.SHORT_SHA}}
+          tags: turbotroll/homework:${{env.REF_NAME}}-${{env.SHORT_SHA}}
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v3
         with:
           name: my-artifact
-          path: ${{github.workspace}}
+          path: ${{env.DOCKER_TAG}}
 
 
 
@@ -87,7 +87,7 @@ jobs:
 
         - name: tag for the docker compose
           run: |
-            echo "IMAGE_TAG=turbotroll/homework:${{ env.REF_NAME}}-${{env.SHORT_SHA}}" >> $GITHUB_ENV
+            echo "IMAGE_TAG=turbotroll/homework:${{env.DOCKER_TAG}}" >> $GITHUB_ENV
             echo $IMAGE_TAG
 
 
