@@ -56,6 +56,7 @@ jobs:
          echo "SHORT_SHA=`echo ${GITHUB_SHA} | cut -c1-7`" >> $GITHUB_ENV
          echo "REF_NAME=`echo ${GITHUB_REF_NAME} |  tr '/' '_'`" >> $GITHUB_ENV
          echo "DOCKER_TAG=`echo ${REF_NAME}-${SHORT_SHA}`" >> $GITHUB_ENV
+         echo "DOCKER_TAG=`echo ${REF_NAME}-${SHORT_SHA}`" >> $GITHUB_OUTPUT
 
 
       - name: Build and push docker image with no tag
@@ -65,13 +66,6 @@ jobs:
           push: true
           tags: turbotroll/homework:${{env.REF_NAME}}-${{env.SHORT_SHA}}
 
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: my-artifact
-          path:  ${{ runner.workspace }}
-
-
 
   deploy:
       needs: push_to_registry
@@ -80,14 +74,11 @@ jobs:
       steps:
         - uses: actions/checkout@v2
 
-        - name: Download Artifact
-          uses: actions/download-artifact@v3
-          with:
-            name: my-artifact
-
         - name: tag for the docker compose
+          env:
+            DOCKER_TAG: ${{ steps.tag.outputs.DOCKER_TAG}}
           run: |
-            echo "IMAGE_TAG=turbotroll/homework:${{env.REF_NAME}}-${{env.SHORT_SHA}}" >> $GITHUB_ENV
+            IMAGE_TAG=turbotroll/homework:$DOCKER_TAG
             echo $IMAGE_TAG
 
 
