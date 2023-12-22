@@ -100,11 +100,11 @@ jobs:
 
         - name: populate known hosts on a runner
           run: |
-            ssh -o StrictHostKeyChecking=no ubuntu@13.52.101.12 exit
+            ssh -o StrictHostKeyChecking=no ubuntu@homework-365773d5e66ee011.elb.us-west-1.amazonaws.com exit
 
         - name: create context for a docker
           run: |
-            docker context create homework --description "remote connection to ec2" --docker "host=ssh://ubuntu@13.52.101.12"
+            docker context create homework --description "remote connection to ec2" --docker "host=ssh://ubuntu@homework-365773d5e66ee011.elb.us-west-1.amazonaws.com"
             docker context use homework
 
         - name: compose up
