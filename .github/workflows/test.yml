@@ -81,7 +81,7 @@ jobs:
 
         - name: tag for the docker compose
           env:
-            DOCKER_TAG: ${{ needs.tag.outputs.DOCKER_TAG }}
+            DOCKER_TAG: ${{ needs.tag.outputs.output1 }}
           run: |
             IMAGE_TAG=turbotroll/homework:$DOCKER_TAG
             echo $DOCKER_TAG
