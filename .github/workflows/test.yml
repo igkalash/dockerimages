@@ -31,6 +31,8 @@ jobs:
   push_to_registry:
     name: Push docker image to docker hub
     runs-on: ubuntu-latest
+    outputs:
+      output1: ${{ steps.tag.outputs.DOCKER_TAG}}
     steps:
       - name: check out the repo
         uses: actions/checkout@v2
@@ -79,10 +81,11 @@ jobs:
 
         - name: tag for the docker compose
           env:
-            DOCKER_TAG: ${{ steps.tag.outputs.DOCKER_TAG }}
+            DOCKER_TAG: ${{ needs.tag.outputs.DOCKER_TAG }}
           run: |
             IMAGE_TAG=turbotroll/homework:$DOCKER_TAG
-            echo ${{ steps.tag.outputs.DOCKER_TAG }}
+            echo $DOCKER_TAG
+
 
 
 
