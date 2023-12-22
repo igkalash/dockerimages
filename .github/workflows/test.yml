@@ -84,8 +84,8 @@ jobs:
           env:
             DOCKER_TAG: ${{ needs.push_to_registry.outputs.output1 }}
           run: |
-            echo "IMAGE_TAG=turbotroll/homework:$DOCKER_TAG" >> $GITHUB_ENV
-            IMAGE_TAG=turbotroll/homework:$DOCKER_TAG
+            echo "IMAGE_TAG=$DOCKER_TAG" >> $GITHUB_ENV
+            IMAGE_TAG=$DOCKER_TAG
             echo $DOCKER_TAG
             echo $IMAGE_TAG
 
