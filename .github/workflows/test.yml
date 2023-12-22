@@ -83,6 +83,7 @@ jobs:
           run: |
             IMAGE_TAG=turbotroll/homework:$DOCKER_TAG
             echo $IMAGE_TAG
+            echo $DOCKER_TAG
 
 
 
