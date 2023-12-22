@@ -87,7 +87,7 @@ jobs:
 
         - name: tag for the docker compose
           run: |
-            echo "IMAGE_TAG=turbotroll/homework:${{env.DOCKER_TAG}}" >> $GITHUB_ENV
+            echo "IMAGE_TAG=turbotroll/homework:${{env.REF_NAME}}-${{env.SHORT_SHA}}" >> $GITHUB_ENV
             echo $IMAGE_TAG
 
 
