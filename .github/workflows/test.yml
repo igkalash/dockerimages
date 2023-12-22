@@ -53,8 +53,8 @@ jobs:
         if: ${{ ! startsWith(github.ref, 'refs/tags/') }}
 
         run: |
-         SHORT_SHA=`echo ${GITHUB_SHA} | cut -c1-7`"
-         echo $SHORT_SHA >> $GITHUB_ENV
+         echo "SHORT_SHA=`echo ${GITHUB_SHA} | cut -c1-7`" >> $GITHUB_ENV
+         SHORT_SHA=`echo ${GITHUB_SHA} | cut -c1-7`
          echo "REF_NAME=`echo ${GITHUB_REF_NAME} |  tr '/' '_'`" >> $GITHUB_ENV
          echo "DOCKER_TAG=`echo ${REF_NAME}-${SHORT_SHA}`" >> $GITHUB_ENV
          echo "DOCKER_TAG=`echo ${REF_NAME}-${SHORT_SHA}`" >> $GITHUB_OUTPUT
