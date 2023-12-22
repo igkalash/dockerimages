@@ -58,6 +58,7 @@ jobs:
          echo "SHORT_SHA=`echo ${GITHUB_SHA} | cut -c1-7`" >> $GITHUB_ENV
          SHORT_SHA=`echo ${GITHUB_SHA} | cut -c1-7`
          echo "REF_NAME=`echo ${GITHUB_REF_NAME} |  tr '/' '_'`" >> $GITHUB_ENV
+         REF_NAME=`echo ${GITHUB_REF_NAME} |  tr '/' '_'`
          echo "DOCKER_TAG=`echo ${REF_NAME}-${SHORT_SHA}`" >> $GITHUB_ENV
          echo "DOCKER_TAG=`echo ${REF_NAME}-${SHORT_SHA}`" >> $GITHUB_OUTPUT
          DOCKER_TAG=`echo ${REF_NAME}-${SHORT_SHA}`
