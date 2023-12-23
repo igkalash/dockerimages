@@ -29,10 +29,11 @@ jobs:
 
 
   push_to_registry:
+    needs: lint
     name: Push docker image to docker hub
     runs-on: ubuntu-latest
     outputs:
-      output1: ${{ steps.tag.outputs.DOCKER_TAG}}
+      docker_tag: ${{ steps.tag.outputs.DOCKER_TAG}}
     steps:
       - name: check out the repo
         uses: actions/checkout@v2
@@ -55,15 +56,14 @@ jobs:
         if: ${{ ! startsWith(github.ref, 'refs/tags/') }}
 
         run: |
-         echo "SHORT_SHA=`echo ${GITHUB_SHA} | cut -c1-7`" >> $GITHUB_ENV
-         SHORT_SHA=`echo ${GITHUB_SHA} | cut -c1-7`
-         echo "REF_NAME=`echo ${GITHUB_REF_NAME} |  tr '/' '_'`" >> $GITHUB_ENV
-         REF_NAME=`echo ${GITHUB_REF_NAME} |  tr '/' '_'`
-         echo "DOCKER_TAG=`echo ${REF_NAME}-${SHORT_SHA}`" >> $GITHUB_ENV
-         echo "DOCKER_TAG=`echo ${REF_NAME}-${SHORT_SHA}`" >> $GITHUB_OUTPUT
-         DOCKER_TAG=`echo ${REF_NAME}-${SHORT_SHA}`
-         echo $DOCKER_TAG
-
+          SHORT_SHA=`echo ${GITHUB_SHA} | cut -c1-7`
+          echo "SHORT_SHA=$SHORT_SHA" >> $GITHUB_ENV
+          echo "REF_NAME=`echo ${GITHUB_REF_NAME} |  tr '/' '_'`" >> $GITHUB_ENV
+          REF_NAME=`echo ${GITHUB_REF_NAME} |  tr '/' '_'`
+          echo "DOCKER_TAG=`echo ${REF_NAME}-${SHORT_SHA}`" >> $GITHUB_ENV
+          echo "DOCKER_TAG=`echo ${REF_NAME}-${SHORT_SHA}`" >> $GITHUB_OUTPUT
+          DOCKER_TAG=`echo ${REF_NAME}-${SHORT_SHA}`
+          echo $DOCKER_TAG
 
       - name: Build and push docker image with no tag
         if: ${{ ! startsWith(github.ref, 'refs/tags/') }}
@@ -82,16 +82,12 @@ jobs:
 
         - name: tag for the docker compose
           env:
-            DOCKER_TAG: ${{ needs.push_to_registry.outputs.output1 }}
+            DOCKER_TAG: ${{ needs.push_to_registry.outputs.docker_tag }}
           run: |
             echo "IMAGE_TAG=$DOCKER_TAG" >> $GITHUB_ENV
             IMAGE_TAG=$DOCKER_TAG
             echo $DOCKER_TAG
             echo $IMAGE_TAG
-
-
-
-
 
         - name: copy key to github runner
           uses: webfactory/ssh-agent@v0.8.0
