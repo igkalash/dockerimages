@@ -56,10 +56,10 @@ jobs:
         if: ${{ ! startsWith(github.ref, 'refs/tags/') }}
 
         run: |
-          SHORT_SHA=`echo ${GITHUB_SHA} | cut -c1-7`
+          SHORT_SHA=$(echo ${GITHUB_SHA} | cut -c1-7)
           echo "SHORT_SHA=$SHORT_SHA" >> $GITHUB_ENV
-          echo "REF_NAME=`echo ${GITHUB_REF_NAME} |  tr '/' '_'`" >> $GITHUB_ENV
-          REF_NAME=`echo ${GITHUB_REF_NAME} |  tr '/' '_'`
+          REF_NAME=$(echo ${GITHUB_REF_NAME} |  tr '/' '_')
+          echo "REF_NAME=$REF_NAME" >> $GITHUB_ENV
           echo "DOCKER_TAG=`echo ${REF_NAME}-${SHORT_SHA}`" >> $GITHUB_ENV
           echo "DOCKER_TAG=`echo ${REF_NAME}-${SHORT_SHA}`" >> $GITHUB_OUTPUT
           DOCKER_TAG=`echo ${REF_NAME}-${SHORT_SHA}`
@@ -96,13 +96,14 @@ jobs:
 
         - name: populate known hosts on a runner
           run: |
-            ssh -o StrictHostKeyChecking=no ubuntu@homework-365773d5e66ee011.elb.us-west-1.amazonaws.com exit
+            ssh -o StrictHostKeyChecking=no ubuntu@ec2-54-176-218-108.us-west-1.compute.amazonaws.com exit
+            ssh -o StrictHostKeyChecking=no ubuntu@ec2-54-177-36-22.us-west-1.compute.amazonaws.com exit
 
         - name: create context for a docker
           run: |
-            docker context create homework --description "remote connection to ec2" --docker "host=ssh://ubuntu@homework-365773d5e66ee011.elb.us-west-1.amazonaws.com"
-            docker context use homework
-
-        - name: compose up
-          run: |
+            docker context create homework1 --description "remote connection to ec2" --docker "host=ssh://ubuntu@ec2-54-176-218-108.us-west-1.compute.amazonaws.com"
+            docker context use homework1
+            docker-compose up -d
+            docker context create homework2 --description "remote connection to ec2" --docker "host=ssh://ubuntu@ec2-54-177-36-22.us-west-1.compute.amazonaws.com"
+            docker context use homework2
             docker-compose up -d
