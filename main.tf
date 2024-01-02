@@ -12,7 +12,7 @@ provider "aws" {
 }
 
 resource "aws_instance" "homework1" {
-  ami           = "ami-006b447fbb1bda5a1"
+  ami           = "ami-08a7a30216d9c5784"
   instance_type = "t2.micro"
   vpc_security_group_ids = ["sg-0400fda14a7993d65"]
   key_name = "homework_key_pair"
@@ -23,7 +23,7 @@ resource "aws_instance" "homework1" {
 }
 
 resource "aws_instance" "homework2" {
-  ami           = "ami-006b447fbb1bda5a1"
+  ami           = "ami-08a7a30216d9c5784"
   instance_type = "t2.micro"
   vpc_security_group_ids = ["sg-0400fda14a7993d65"]
   key_name = "homework_key_pair"
