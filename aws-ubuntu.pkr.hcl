@@ -13,8 +13,8 @@ source "amazon-ebs" "ubuntu" {
   region        = "us-west-1"
   source_ami    = "ami-0ce2cb35386fc22e9"
   ssh_username  = "ubuntu"
-  access_key    = "AKIAT5LOEFWNP7V3SGFJ"
-  secret_key    = "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"
+  access_key    = ""
+  secret_key    = ""
 
 }
 
