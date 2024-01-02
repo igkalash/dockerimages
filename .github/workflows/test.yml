@@ -96,8 +96,8 @@ jobs:
 
         - name: populate known hosts on a runner
           run: |
-            ssh -o StrictHostKeyChecking=no ubuntu@ec2-54-176-218-108.us-west-1.compute.amazonaws.com exit
-            ssh -o StrictHostKeyChecking=no ubuntu@ec2-54-177-36-22.us-west-1.compute.amazonaws.com exit
+            ssh -o StrictHostKeyChecking=no ubuntu@ec2-54-177-191-157.us-west-1.compute.amazonaws.com exit
+            ssh -o StrictHostKeyChecking=no ubuntu@ec2-54-153-120-165.us-west-1.compute.amazonaws.com
 
         - name: create context for a docker
           run: |
