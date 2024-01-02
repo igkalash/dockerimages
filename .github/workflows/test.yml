@@ -101,9 +101,9 @@ jobs:
 
         - name: create context for a docker
           run: |
-            docker context create homework1 --description "remote connection to ec2" --docker "host=ssh://ubuntu@ec2-54-176-218-108.us-west-1.compute.amazonaws.com"
+            docker context create homework1 --description "remote connection to ec2" --docker "host=ssh://ubuntu@ec2-54-177-191-157.us-west-1.compute.amazonaws.com"
             docker context use homework1
             docker-compose up -d
-            docker context create homework2 --description "remote connection to ec2" --docker "host=ssh://ubuntu@ec2-54-177-36-22.us-west-1.compute.amazonaws.com"
+            docker context create homework2 --description "remote connection to ec2" --docker "host=ssh://ubuntu@ec2-54-153-120-165.us-west-1.compute.amazonaws.com"
             docker context use homework2
             docker-compose up -d
