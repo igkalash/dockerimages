@@ -96,14 +96,14 @@ jobs:
 
         - name: populate known hosts on a runner
           run: |
-            ssh -o StrictHostKeyChecking=no ubuntu@ec2-54-177-191-157.us-west-1.compute.amazonaws.com exit
-            ssh -o StrictHostKeyChecking=no ubuntu@ec2-54-153-120-165.us-west-1.compute.amazonaws.com
+            ssh -o StrictHostKeyChecking=no ubuntu@host1.homework.systems exit
+            ssh -o StrictHostKeyChecking=no ubuntu@host2.homework.systems exit
 
         - name: create context for a docker
           run: |
-            docker context create homework1 --description "remote connection to ec2" --docker "host=ssh://ubuntu@ec2-54-177-191-157.us-west-1.compute.amazonaws.com"
-            docker context use homework1
-            docker-compose up -d
-            docker context create homework2 --description "remote connection to ec2" --docker "host=ssh://ubuntu@ec2-54-153-120-165.us-west-1.compute.amazonaws.com"
-            docker context use homework2
-            docker-compose up -d
+            for i in 1 2
+            do
+              docker context create homework2 --description "remote connection to ec2" --docker "host=ssh://ubuntu@host$i.homework.systems"
+              docker context use homework2
+              docker-compose up -d
+            done
