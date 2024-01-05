@@ -4,3 +4,6 @@ terraform.tfstate
 terraform.tfstate.backup
 .terraform.tfstate.lock.info
 graph.svg
+Dockerfile1
+index.html
+pricing.css
