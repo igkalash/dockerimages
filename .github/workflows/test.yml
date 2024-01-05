@@ -103,7 +103,7 @@ jobs:
           run: |
             for i in 1 2
             do
-              docker context create homework2 --description "remote connection to ec2" --docker "host=ssh://ubuntu@host$i.homework.systems"
-              docker context use homework2
+              docker context create homework$i --description "remote connection to ec2" --docker "host=ssh://ubuntu@host$i.homework.systems"
+              docker context use homework$i
               docker-compose up -d
             done
