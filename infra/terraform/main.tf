@@ -31,9 +31,7 @@ resource "aws_instance" "homework2" {
     Name = "homework tag"
   }
 }
-data "aws_vpc" "default_vpc" {
-  default = true
-}
+
 
 # data "aws_subnet_ids" "default_subnet" {
 #   vpc_id = data.aws_vpc.default_vpc.id
@@ -43,12 +41,23 @@ resource "aws_security_group" "instances" {
   name = "instance-security-group"
 }
 
-resource "aws_security_group_rule" "allow_http_inbound" {
+resource "aws_security_group_rule" "allow_5000_inbound" {
   type              = "ingress"
   security_group_id = aws_security_group.instances.id
 
-  from_port   = 8080
-  to_port     = 8080
+  from_port   = 5000
+  to_port     = 5000
+  protocol    = "tcp"
+  cidr_blocks = ["0.0.0.0/0"]
+}
+
+
+resource "aws_security_group_rule" "allow_ssh_inbound" {
+  type              = "ingress"
+  security_group_id = aws_security_group.instances.id
+
+  from_port   = 22
+  to_port     = 22
   protocol    = "tcp"
   cidr_blocks = ["0.0.0.0/0"]
 }
@@ -74,7 +83,7 @@ resource "aws_lb_listener" "http" {
 
 resource "aws_lb_target_group" "instances" {
   name     = "example-target-group"
-  port     = 8080
+  port     = 5000
   protocol = "HTTP"
   vpc_id   = data.aws_vpc.default_vpc.id
 
@@ -92,13 +101,13 @@ resource "aws_lb_target_group" "instances" {
 resource "aws_lb_target_group_attachment" "homework1" {
   target_group_arn = aws_lb_target_group.instances.arn
   target_id        = aws_instance.homework1.id
-  port             = 8080
+  port             = 5000
 }
 
 resource "aws_lb_target_group_attachment" "homework2" {
   target_group_arn = aws_lb_target_group.instances.arn
   target_id        = aws_instance.homework2.id
-  port             = 8080
+  port             = 5000
 }
 
 resource "aws_lb_listener_rule" "instances" {
@@ -144,11 +153,24 @@ resource "aws_security_group_rule" "allow_alb_all_outbound" {
 
 }
 
+data "aws_vpc" "default_vpc" {
+  default = true
+
+}
+
+
+data "aws_subnets" "default_subnets" {
+
+  filter {
+    name   = "vpc-id"
+    values = [data.aws_vpc.default_vpc.id]
+  }
+}
 
 resource "aws_lb" "load_balancer" {
   name               = "web-app-lb"
   load_balancer_type = "application"
-  subnets            = data.aws_subnet_ids.default_subnet.ids
+  subnets            = data.aws_subnets.default_subnets.ids
   security_groups    = [aws_security_group.alb.id]
 
 }
