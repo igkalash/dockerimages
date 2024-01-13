@@ -86,17 +86,7 @@ resource "aws_lb_target_group" "instances" {
   port     = 5000
   protocol = "HTTP"
   vpc_id   = data.aws_vpc.default_vpc.id
-
-  health_check {
-    path                = "/"
-    protocol            = "HTTP"
-    matcher             = "200"
-    interval            = 15
-    timeout             = 3
-    healthy_threshold   = 2
-    unhealthy_threshold = 2
   }
-}
 
 resource "aws_lb_target_group_attachment" "homework1" {
   target_group_arn = aws_lb_target_group.instances.arn
@@ -189,4 +179,22 @@ resource "aws_route53_record" "root" {
     zone_id                = aws_lb.load_balancer.zone_id
     evaluate_target_health = true
   }
+}
+
+resource "aws_route53_record" "homework1" {
+  zone_id = aws_route53_zone.primary.zone_id
+  name    = "host1.homework.systems"
+  type    = "A"
+  records = [aws_instance.homework1.public_ip]
+  ttl     = 300
+
+}
+
+resource "aws_route53_record" "homework2" {
+  zone_id = aws_route53_zone.primary.zone_id
+  name    = "host2.homework.systems"
+  type    = "A"
+  records = [aws_instance.homework2.public_ip]
+  ttl     = 300
+
 }
