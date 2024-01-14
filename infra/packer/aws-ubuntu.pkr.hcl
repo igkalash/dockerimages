@@ -30,7 +30,7 @@ build {
       "sudo apt-get update",
       "sudo apt-get install -y docker-ce",
       "sudo usermod -aG docker ubuntu",
-      "docker pull turbotroll/homework:test-tag"
+
     ]
   }
 }
