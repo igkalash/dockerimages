@@ -28,4 +28,4 @@ jobs:
           run: "packer build ./infra/packer/aws-ubuntu.pkr.hcl"
           env:
             ACESS_KEY: ${{ secrets.AWS_ACCESS_KEY }}
-            SECRET_KEY: ${{ secrets.AWS_SECRET_KEY_ACCESS_KEY }}
+            SECRET_KEY: ${{ secrets.AWS_SECRET_KEY}}
