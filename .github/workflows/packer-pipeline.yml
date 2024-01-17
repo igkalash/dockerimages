@@ -8,6 +8,11 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      ACCESS_KEY: ${{ secrets.AWS_ACCESS_KEY }}
+      SECRET_KEY: ${{ secrets.AWS_SECRET_KEY }}
+
+
 
     steps:
         - name: Checkout
