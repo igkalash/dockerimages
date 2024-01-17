@@ -13,8 +13,8 @@ source "amazon-ebs" "ubuntu" {
   region        = "us-west-1"
   source_ami    = "ami-0ce2cb35386fc22e9"
   ssh_username  = "ubuntu"
-  access_key    = ${{ AWS_ACCESS_KEY }}
-  secret_key    = ${{ AWS_SECRET_KEY}}
+  access_key    = ${ACCESS_KEY}
+  secret_key    = ${SECRET_KEY}
 
 }
 
@@ -30,7 +30,6 @@ build {
       "sudo apt-get update",
       "sudo apt-get install -y docker-ce",
       "sudo usermod -aG docker ubuntu",
-
 
     ]
   }
