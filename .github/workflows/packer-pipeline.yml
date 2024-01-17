@@ -23,6 +23,9 @@ jobs:
 
         - name: Run `packer validate`
           run: "packer validate ./infra/packer/aws-ubuntu.pkr.hcl"
+          env:
+            ACESS_KEY: ${{ secrets.AWS_ACCESS_KEY }}
+            SECRET_KEY: ${{ secrets.AWS_SECRET_KEY}}
 
         - name: Run `packer build`
           run: "packer build ./infra/packer/aws-ubuntu.pkr.hcl"
