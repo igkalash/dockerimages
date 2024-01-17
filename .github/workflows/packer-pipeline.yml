@@ -18,7 +18,9 @@ jobs:
 
         - name: Set up environment variables
           run: |
+            ACCESS_KEY=${{ secrets.AWS_ACCESS_KEY  }}
             echo "ACCESS_KEY=${{ secrets.AWS_ACCESS_KEY  }}" >> $GITHUB_ENV
+            SECRET_KEY=${{ secrets.AWS_SECRET_KEY  }}
             echo "SECRET_KEY=${{ secrets.AWS_SECRET_KEY  }}" >> $GITHUB_ENV
 
         - name: Run `packer init`
