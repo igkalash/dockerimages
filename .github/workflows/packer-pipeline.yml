@@ -16,20 +16,17 @@ jobs:
         - name: Setup packer
           uses: hashicorp/setup-packer@main
 
-
+        - name: Set up environment variables
+          run: |
+            echo "ACESS_KEY=${{ secrets.AWS_ACCESS_KEY  }}" >> $GITHUB_ENV
+            echo "SECRET_KEY=${{ secrets.AWS_SECRET_KEY  }}" >> $GITHUB_ENV
 
         - name: Run `packer init`
           run: "packer init ./infra/packer/aws-ubuntu.pkr.hcl"
 
         - name: Run `packer validate`
-          env:
-            ACESS_KEY: ${{ secrets.AWS_ACCESS_KEY }}
-            SECRET_KEY: ${{ secrets.AWS_SECRET_KEY}}
           run: "packer validate ./infra/packer/aws-ubuntu.pkr.hcl"
 
 
         - name: Run `packer build`
-          env:
-            ACESS_KEY: ${{ secrets.AWS_ACCESS_KEY }}
-            SECRET_KEY: ${{ secrets.AWS_SECRET_KEY}}
           run: "packer build ./infra/packer/aws-ubuntu.pkr.hcl"
