@@ -1,0 +1,26 @@
+name: Packer Build
+
+on:
+  push:
+    paths:
+      - 'infra/packer/*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+        - name: Checkout
+          uses: actions/checkout@v3
+
+        - name: Setup packer
+          uses: hashicorp/setup-packer@main
+
+        - name: Run `packer init`
+          run: "packer init ./infra/packer/aws-ubuntu.pkr.hcl"
+
+        - name: Run `packer validate`
+          run: "packer validate ./infra/packer/aws-ubuntu.pkr.hcl"
+
+        - name: Run `packer build`
+          run: "packer build ./infra/packer/aws-ubuntu.pkr.hcl"
