@@ -31,7 +31,6 @@ build {
       "sudo apt-get install -y docker-ce",
       "sudo usermod -aG docker ubuntu",
 
-
     ]
   }
 }
