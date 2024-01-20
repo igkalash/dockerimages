@@ -161,12 +161,12 @@ resource "aws_lb" "load_balancer" {
 
 }
 
-resource "aws_route53_zone" "primary" {
+data "aws_route53_zone" "primary" {
   name = "homework.systems"
 }
 
 resource "aws_route53_record" "root" {
-  zone_id = aws_route53_zone.primary.zone_id
+  zone_id = data.aws_route53_zone.primary.zone_id
   name    = "homework.systems"
   type    = "A"
 
@@ -178,7 +178,7 @@ resource "aws_route53_record" "root" {
 }
 
 resource "aws_route53_record" "homework1" {
-  zone_id = aws_route53_zone.primary.zone_id
+  zone_id = data.aws_route53_zone.primary.zone_id
   name    = "host1.homework.systems"
   type    = "A"
   records = [aws_instance.homework1.public_ip]
@@ -187,7 +187,7 @@ resource "aws_route53_record" "homework1" {
 }
 
 resource "aws_route53_record" "homework2" {
-  zone_id = aws_route53_zone.primary.zone_id
+  zone_id = data.aws_route53_zone.primary.zone_id
   name    = "host2.homework.systems"
   type    = "A"
   records = [aws_instance.homework2.public_ip]
