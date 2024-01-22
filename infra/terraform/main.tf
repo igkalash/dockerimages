@@ -104,22 +104,6 @@ resource "aws_lb_target_group_attachment" "homework2" {
   port             = 5000
 }
 
-# resource "aws_lb_listener_rule" "instances" {
-#   listener_arn = aws_lb_listener.http.arn
-#   priority     = 100
-
-#   condition {
-#     path_pattern {
-#       values = ["*"]
-#     }
-#   }
-
-#   action {
-#     type             = "forward"
-#     target_group_arn = aws_lb_target_group.instances.arn
-#   }
-# }
-
 
 resource "aws_security_group" "alb" {
   name = "alb-security-group"
@@ -169,12 +153,12 @@ resource "aws_lb" "load_balancer" {
 
 }
 
-data "aws_route53_zone" "primary" {
+resource "aws_route53_zone" "primary" {
   name = "homework.systems"
 }
 
 resource "aws_route53_record" "root" {
-  zone_id = data.aws_route53_zone.primary.zone_id
+  zone_id = aws_route53_zone.primary.zone_id
   name    = "homework.systems"
   type    = "A"
 
@@ -186,19 +170,20 @@ resource "aws_route53_record" "root" {
 }
 
 resource "aws_route53_record" "homework1" {
-  zone_id = data.aws_route53_zone.primary.zone_id
+  zone_id = aws_route53_zone.primary.zone_id
   name    = "host1.homework.systems"
   type    = "A"
   records = [aws_instance.homework1.public_ip]
   ttl     = 300
+  depends_on = [ aws_instance.homework1 ]
 
 }
 
 resource "aws_route53_record" "homework2" {
-  zone_id = data.aws_route53_zone.primary.zone_id
+  zone_id = aws_route53_zone.primary.zone_id
   name    = "host2.homework.systems"
   type    = "A"
   records = [aws_instance.homework2.public_ip]
   ttl     = 300
-
+  depends_on = [ aws_instance.homework2 ]
 }
