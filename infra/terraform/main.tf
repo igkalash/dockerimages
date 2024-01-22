@@ -155,6 +155,7 @@ resource "aws_lb" "load_balancer" {
 
 resource "aws_route53_zone" "primary" {
   name = "homework.systems"
+
 }
 
 resource "aws_route53_record" "root" {
