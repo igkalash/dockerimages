@@ -1,3 +1,3 @@
 # Homework project
 
-<img width="400px" src="images/homework.png">
+<img  src="images/homework.png">
