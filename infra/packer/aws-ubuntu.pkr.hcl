@@ -8,7 +8,7 @@ packer {
 }
 
 source "amazon-ebs" "ubuntu" {
-  ami_name      = "homework-ubuntu-aws"
+  ami_name      = "homework-ubuntu-aws-test"
   instance_type = "t2.micro"
   region        = "us-west-1"
   source_ami    = "ami-0ce2cb35386fc22e9"
