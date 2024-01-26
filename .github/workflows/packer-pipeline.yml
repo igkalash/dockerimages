@@ -31,9 +31,7 @@ jobs:
           run: "packer init ./infra/packer/aws-ubuntu.pkr.hcl"
 
         - name: Run `packer validate`
-          run: |
-            aws ec2 deregister-image --image-id homework-ubuntu-aws
-            packer validate  ./infra/packer/aws-ubuntu.pkr.hcl
+          run: "packer validate  ./infra/packer/aws-ubuntu.pkr.hcl"
 
         - name: Run `packer build`
           run: "packer build ./infra/packer/aws-ubuntu.pkr.hcl"
