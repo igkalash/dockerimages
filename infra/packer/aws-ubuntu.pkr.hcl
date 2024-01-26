@@ -16,6 +16,7 @@ source "amazon-ebs" "ubuntu" {
   access_key    = "${ACCESS_KEY}"
   secret_key    = "${SECRET_KEY}"
 
+
 }
 
 build {
