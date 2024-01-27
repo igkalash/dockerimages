@@ -11,6 +11,9 @@ provider "aws" {
   region = "us-west-1"
 }
 
+#keyname -> var
+
+
 resource "aws_instance" "homework1" {
   ami           = "ami-0281f4ac130d55502"
   instance_type = "t2.micro"
@@ -104,28 +107,12 @@ resource "aws_lb_target_group_attachment" "homework2" {
   port             = 5000
 }
 
-# resource "aws_lb_listener_rule" "instances" {
-#   listener_arn = aws_lb_listener.http.arn
-#   priority     = 100
-
-#   condition {
-#     path_pattern {
-#       values = ["*"]
-#     }
-#   }
-
-#   action {
-#     type             = "forward"
-#     target_group_arn = aws_lb_target_group.instances.arn
-#   }
-# }
-
 
 resource "aws_security_group" "alb" {
   name = "alb-security-group"
 }
 
-resource "aws_security_group_rule" "allow_alb_http_inbound" {
+resource "aws_security_group_rule" "allow_http_inbound" {
   type              = "ingress"
   security_group_id = aws_security_group.alb.id
 
@@ -168,6 +155,8 @@ resource "aws_lb" "load_balancer" {
   security_groups    = [aws_security_group.alb.id]
 
 }
+
+# make var for dns records
 
 data "aws_route53_zone" "primary" {
   name = "homework.systems"
