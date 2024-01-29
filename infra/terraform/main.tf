@@ -156,13 +156,13 @@ resource "aws_lb" "load_balancer" {
 
 }
 
-resource "aws_route53_zone" "primary" {
+data "aws_route53_zone" "primary" {
   name = "homework.systems"
 
 }
 
 resource "aws_route53_record" "root" {
-  zone_id = aws_route53_zone.primary.zone_id
+  zone_id = data.aws_route53_zone.primary.zone_id
   name    = "homework.systems"
   type    = "A"
 
@@ -174,7 +174,7 @@ resource "aws_route53_record" "root" {
 }
 
 resource "aws_route53_record" "homework1" {
-  zone_id = aws_route53_zone.primary.zone_id
+  zone_id = data.aws_route53_zone.primary.zone_id
   name    = "host1.homework.systems"
   type    = "A"
   records = [aws_instance.homework1.public_ip]
@@ -184,32 +184,10 @@ resource "aws_route53_record" "homework1" {
 }
 
 resource "aws_route53_record" "homework2" {
-  zone_id = aws_route53_zone.primary.zone_id
+  zone_id = data.aws_route53_zone.primary.zone_id
   name    = "host2.homework.systems"
   type    = "A"
   records = [aws_instance.homework2.public_ip]
   ttl     = 300
   depends_on = [ aws_instance.homework2 ]
-}
-
-resource "aws_route53domains_registered_domain" "homework_domain" {
-  domain_name = "homework.systems"
-
-  name_server {
-    name = "ns-1258.awsdns-29.org"
-  }
-
-  name_server {
-    name = "ns-1626.awsdns-11.co.uk"
-  }
-
-   name_server {
-    name = "ns-351.awsdns-43.com"
-  }
-
-   name_server {
-    name = "ns-572.awsdns-07.net"
-  }
-
-
 }
