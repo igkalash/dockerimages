@@ -11,28 +11,17 @@ provider "aws" {
   region = "us-west-1"
 }
 
-#keyname -> var
 
-
-resource "aws_instance" "homework1" {
-  ami           = "ami-0281f4ac130d55502"
-  instance_type = "t2.micro"
+resource "aws_instance" "homework" {
+  count           = 2
+  ami             = "ami-0281f4ac130d55502"
+  instance_type   = "t2.micro"
   security_groups = [aws_security_group.instances.name]
-  key_name = "homework_key_pair"
+  key_name        = "homework_key_pair"
   tags = {
-    Name = "homework tag"
+    Name = "Server ${count.index + 1}"
   }
 
-}
-
-resource "aws_instance" "homework2" {
-  ami           = "ami-0281f4ac130d55502"
-  instance_type = "t2.micro"
-  security_groups = [aws_security_group.instances.name]
-  key_name = "homework_key_pair"
-  tags = {
-    Name = "homework tag"
-  }
 }
 
 
@@ -56,7 +45,7 @@ resource "aws_security_group_rule" "allow_outbound" {
   from_port         = 0
   to_port           = 0
   protocol          = "-1"
-  cidr_blocks = ["0.0.0.0/0"]
+  cidr_blocks       = ["0.0.0.0/0"]
 }
 
 resource "aws_security_group_rule" "allow_ssh_inbound" {
@@ -89,21 +78,14 @@ resource "aws_lb_target_group" "instances" {
   port     = 5000
   protocol = "TCP"
   vpc_id   = data.aws_vpc.default_vpc.id
-  }
-
-
-
-resource "aws_lb_target_group_attachment" "homework1" {
-  target_group_arn = aws_lb_target_group.instances.arn
-  target_id        = aws_instance.homework1.id
-  port             = 5000
 }
 
 
 
-resource "aws_lb_target_group_attachment" "homework2" {
+resource "aws_lb_target_group_attachment" "homework" {
+  count            = 2
   target_group_arn = aws_lb_target_group.instances.arn
-  target_id        = aws_instance.homework2.id
+  target_id        = aws_instance.homework[count.index].id
   port             = 5000
 }
 
@@ -173,21 +155,12 @@ resource "aws_route53_record" "root" {
   }
 }
 
-resource "aws_route53_record" "homework1" {
-  zone_id = data.aws_route53_zone.primary.zone_id
-  name    = "host1.homework.systems"
-  type    = "A"
-  records = [aws_instance.homework1.public_ip]
-  ttl     = 300
-  depends_on = [ aws_instance.homework1 ]
-
-}
-
-resource "aws_route53_record" "homework2" {
-  zone_id = data.aws_route53_zone.primary.zone_id
-  name    = "host2.homework.systems"
-  type    = "A"
-  records = [aws_instance.homework2.public_ip]
-  ttl     = 300
-  depends_on = [ aws_instance.homework2 ]
+resource "aws_route53_record" "homework" {
+  count      = 2
+  zone_id    = data.aws_route53_zone.primary.zone_id
+  name       = "host${count.index + 1}.homework.systems"
+  type       = "A"
+  records    = [aws_instance.homework[count.index].public_ip]
+  ttl        = 300
+  depends_on = [aws_instance.homework]
 }
