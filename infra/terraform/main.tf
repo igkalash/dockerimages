@@ -13,9 +13,9 @@ provider "aws" {
 
 
 resource "aws_instance" "homework" {
-  count           = 2
+  count           = var.ec2_count
   ami             = "ami-0281f4ac130d55502"
-  instance_type   = "t2.micro"
+  instance_type   = var.ec2_instance_type
   security_groups = [aws_security_group.instances.name]
   key_name        = "homework_key_pair"
   tags = {
@@ -83,7 +83,7 @@ resource "aws_lb_target_group" "instances" {
 
 
 resource "aws_lb_target_group_attachment" "homework" {
-  count            = 2
+  count            = var.ec2_count
   target_group_arn = aws_lb_target_group.instances.arn
   target_id        = aws_instance.homework[count.index].id
   port             = 5000
@@ -156,7 +156,7 @@ resource "aws_route53_record" "root" {
 }
 
 resource "aws_route53_record" "homework" {
-  count      = 2
+  count      = var.ec2_count
   zone_id    = data.aws_route53_zone.primary.zone_id
   name       = "host${count.index + 1}.homework.systems"
   type       = "A"
