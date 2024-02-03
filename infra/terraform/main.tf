@@ -14,26 +14,27 @@ provider "aws" {
 #keyname -> var
 
 
-resource "aws_instance" "homework1" {
+resource "aws_instance" "homework" {
+  count = 2
   ami           = "ami-0281f4ac130d55502"
   instance_type = "t2.micro"
   security_groups = [aws_security_group.instances.name]
   key_name = "homework_key_pair"
   tags = {
-    Name = "homework tag"
+    Name = "homework ${count.index}"
   }
 
 }
 
-resource "aws_instance" "homework2" {
-  ami           = "ami-0281f4ac130d55502"
-  instance_type = "t2.micro"
-  security_groups = [aws_security_group.instances.name]
-  key_name = "homework_key_pair"
-  tags = {
-    Name = "homework tag"
-  }
-}
+# resource "aws_instance" "homework2" {
+#   ami           = "ami-0281f4ac130d55502"
+#   instance_type = "t2.micro"
+#   security_groups = [aws_security_group.instances.name]
+#   key_name = "homework_key_pair"
+#   tags = {
+#     Name = "homework tag"
+#   }
+# }
 
 
 resource "aws_security_group" "instances" {
@@ -210,6 +211,5 @@ resource "aws_route53domains_registered_domain" "homework_domain" {
    name_server {
     name = "ns-572.awsdns-07.net"
   }
-
 
 }
