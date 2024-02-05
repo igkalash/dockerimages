@@ -174,25 +174,3 @@ resource "aws_route53_record" "homework" {
   ttl        = 300
   depends_on = [aws_instance.homework]
 }
-
-resource "aws_route53domains_registered_domain" "homework_domain" {
-  domain_name = "homework.systems"
-
-  name_server {
-    name = "ns-1258.awsdns-29.org"
-  }
-
-  name_server {
-    name = "ns-1626.awsdns-11.co.uk"
-  }
-
-   name_server {
-    name = "ns-351.awsdns-43.com"
-  }
-
-   name_server {
-    name = "ns-572.awsdns-07.net"
-  }
-
-
-}
