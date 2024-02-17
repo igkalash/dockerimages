@@ -1,0 +1,4 @@
+container:
+  image: turbotroll/homework:main-d81b690
+
+replicaCount: 2
